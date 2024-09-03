@@ -2,17 +2,21 @@ import streamlit as st
 import openai
 from parse_hh import extract_candidate_data, get_html
 
-api_key = st.secrets["api_key"]
+import streamlit as st
 
-# Если ключ не найден, запрашиваем его у пользователя
-if not api_key:
+# Проверяем наличие ключа в st.secrets
+if "api_key" in st.secrets:
+    api_key = st.secrets["api_key"]
+else:
+    # Запрашиваем ключ у пользователя
     api_key = st.text_input("Введите ваш API ключ:", type="password")
-
-    # Сохраняем ключ в secrets.toml, если он введен
+    
+    # Если ключ введен, сохраняем его
     if api_key:
         with open(".streamlit/secrets.toml", "a") as f:
             f.write(f'api_key = "{api_key}"\n')
         st.success("API ключ сохранен.")
+
 
 # Создаем клиента OpenAI
 client = openai.Client(api_key=api_key)
