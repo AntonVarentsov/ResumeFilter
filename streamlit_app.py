@@ -9,7 +9,7 @@ if "api_key" in st.secrets:
     api_key = st.secrets["api_key"]
 else:
     # Запрашиваем ключ у пользователя
-    api_key = st.text_input("Введите ваш API ключ:", type="password")
+    api_key = st.text_input("Введите ваш OpenAI API ключ:", type="password")
     
     # Если ключ введен, сохраняем его
     if api_key:
