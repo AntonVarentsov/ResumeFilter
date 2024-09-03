@@ -4,6 +4,16 @@ from parse_hh import extract_candidate_data, get_html
 
 api_key = st.secrets["api_key"]
 
+# Если ключ не найден, запрашиваем его у пользователя
+if not api_key:
+    api_key = st.text_input("Введите ваш API ключ:", type="password")
+
+    # Сохраняем ключ в secrets.toml, если он введен
+    if api_key:
+        with open(".streamlit/secrets.toml", "a") as f:
+            f.write(f'api_key = "{api_key}"\n')
+        st.success("API ключ сохранен.")
+
 # Создаем клиента OpenAI
 client = openai.Client(api_key=api_key)
 
