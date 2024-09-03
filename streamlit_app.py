@@ -11,11 +11,7 @@ else:
     # Запрашиваем ключ у пользователя
     api_key = st.text_input("Введите ваш OpenAI API ключ:", type="password")
     
-    # Если ключ введен, сохраняем его
-    if api_key:
-        with open(".streamlit/secrets.toml", "a") as f:
-            f.write(f'api_key = "{api_key}"\n')
-        st.success("API ключ сохранен.")
+
 
 
 # Создаем клиента OpenAI
