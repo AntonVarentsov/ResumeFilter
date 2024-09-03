@@ -22,12 +22,12 @@ def request_gpt(system_prompt, user_prompt):
     return response.choices[0].message.content
 
 
-st.title('CV Scoring App')
+st.title('Оценка резюме на хедхантере')
 
-job_description = st.text_area('Job Description')
+job_description = st.text_area('Описание вашей вакансии в текстовом виде')
 
-cv =  st.text_area('CV')
-cv_url = st.text_input('CV URL')
+cv =  st.text_area('Резюме кандидата в текстовом виде (или можно поставить ниже ссылку на резюме)')
+cv_url = st.text_input('Ссылка на резюме на HH.ru')
 
 if cv:
     cv = cv
@@ -45,8 +45,8 @@ SYSTEM_PROMPT = """
 При выводе результатов используй markdown
 """.strip()
 
-if st.button('Score'):
-    with st.spinner('Wait for it...'):
+if st.button('Оценить'):
+    with st.spinner('Ждем оценки...'):
         user_prompt = f"# ВАКАНСИЯ\n{job_description}\n\n# РЕЗЮМЕ\n{cv}"
         response = request_gpt(SYSTEM_PROMPT, user_prompt)
 
